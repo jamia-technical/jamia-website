@@ -1,0 +1,145 @@
+"use client";
+
+import Image from "next/image";
+import React from "react";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+// @ts-ignore
+import "swiper/css";
+
+const GraduateLogosSection: React.FC = () => {
+  const logoRows1: string[][] = [
+    // Row 1
+    [
+      "/logos/22.png",
+      "/logos/25.png",
+      "/logos/34.png",
+      "/logos/2.png",
+      "/logos/3.png",
+      "/logos/23.svg",
+    ],
+    // Row 2
+    [
+      "/logos/1.png",
+      "/logos/4.png",
+      "/logos/5.png",
+      "/logos/6.png",
+      "/logos/7.png",
+      "/logos/8.png",
+    ],
+  ];
+
+  const logoRows2: string[][] = [
+    [
+      "/logos/11.png",
+      "/logos/12.png",
+      "/logos/13.png",
+      "/logos/14.png",
+      "/logos/15.png",
+      "/logos/9.png",
+      "/logos/10.png",
+      "/logos/27.png",
+      "/logos/28.png",
+    ],
+    [
+      "/logos/16.png",
+      "/logos/17.png",
+      "/logos/18.png",
+      "/logos/19.png",
+      "/logos/20.png",
+      "/logos/21.png",
+      "/logos/31.png",
+      "/logos/32.svg",
+    ],
+  ];
+
+  return (
+    <section
+      className="py-16 bg-white"
+      data-aos="fade-up"
+      data-aos-duration="1000"
+    >
+      <div className="container mx-auto px-4">
+        <h2 className="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+          See Our Graduates In
+        </h2>
+
+        {/* Logo Grid - Static Rows */}
+        <div className="space-y-12 ">
+          {logoRows1.map((row, rowIndex) => (
+            <div
+              key={`row-${rowIndex}`}
+              className="flex flex-wrap items-center justify-center gap-8 md:gap-12"
+            >
+              {row.map((university) => (
+                <div
+                  data-aos="fade-up"
+                  data-aos-duration="1000"
+                  key={university}
+                  className="flex flex-col items-center group"
+                >
+                  <div className="w-24 h-24 md:w-28 md:h-28 bg-gray-50 rounded-full flex items-center justify-center p-4 border-2 border-gray-100 transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-md">
+                    <div className="text-gray-400 text-xs text-center">
+                      <Image
+                        src={university}
+                        alt="University Logo"
+                        width={80}
+                        height={80}
+                        className="object-contain h-full w-full"
+                      />
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+
+        {/* Logo Carousel Rows */}
+        <div className="space-y-12 lg:w-10/12 m-auto mt-12">
+          {logoRows2.map((row, rowIndex) => (
+            <Swiper
+              key={`row-${rowIndex}`}
+              modules={[Autoplay]}
+              spaceBetween={32}
+              slidesPerView={3}
+              autoplay={{
+                delay: 0,
+                disableOnInteraction: false,
+              }}
+              speed={2000}
+              loop={true}
+              breakpoints={{
+                464: {
+                  slidesPerView: 4,
+                },
+                1024: {
+                  slidesPerView: 6,
+                },
+              }}
+              className="py-4"
+            >
+              {row.map((university) => (
+                <SwiperSlide key={university}>
+                  <div className="flex flex-col items-center group">
+                    <div className="w-24 h-24 md:w-24 md:h-24 bg-gray-50 rounded-full flex items-center justify-center p-4 border-2 border-gray-100 transition-all duration-300 group-hover:border-primary/30 group-hover:shadow-md">
+                      <Image
+                        src={university}
+                        alt="University Logo"
+                        width={70}
+                        height={70}
+                        className="object-contain h-full w-full"
+                      />
+                    </div>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default GraduateLogosSection;
